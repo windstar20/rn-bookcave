@@ -1,11 +1,13 @@
 import express from "express";
 import protectRoute from "../middleware/auth.middleware.js";
-
+import Book from "../models/Book.js";
+import cloudinary from "../lib/cloudinary.js";
 
 const router = express.Router();
 // create
 router.post("/", protectRoute, async (req, res) => {
     try {
+        console.log("bookRoutes.js", req.body);
         const {title, caption, image, rating} = req.body;
         if (!title || !caption || !image || !rating) {
             return res.status(400).json({msg: "Fill all the fields"});
